@@ -1,0 +1,7 @@
+<?xml version="1.0"?> 
+<report>
+  <runs>
+    <run status="ok" command="%ignore%" id="1" messages="0" runId="%ignore%" time="%ignore%"/>
+  </runs>
+  <messages/>
+</report>

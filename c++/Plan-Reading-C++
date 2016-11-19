@@ -1,0 +1,10 @@
+1) new allocator/delete
+pointer = new type [number_of_elements]
+delete pointer;
+delete[] pointer;
+delete [] value;
+
+2) pointers to pointers
+3) Think of stuff specific to C++
+4) private/public/protected
+5) Reference in C++

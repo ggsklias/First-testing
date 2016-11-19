@@ -1,0 +1,32 @@
+Comparing Execution Time:
+
+---AARCH64-ANDROID---
+Tommy's: 2hr43mins		
+	 ~4-5hours	
+
+Saved:   ~1-2 hours
+
+---AARCH64-LINUX---
+Hidde's: 5hr18mins	
+Hidde's: 5hr50-6hours
+
+Saved:	 ~30mins
+
+---arm-android---
+vfbuild: 1hr55mins
+vfbuild: 2hr17mins
+
+---vfandroid_tst---
+i7ivy:   33mins		Build 243
+i7ivy:	 36mins		Build 231
+
+--No timings
+--Small test which use the cases:
+
+I am gonna show you how to use it.
+
+Wrong about android-tst
+--directory or a list of datafiles
+
+	 
+	 

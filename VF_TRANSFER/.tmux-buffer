@@ -1,0 +1,4 @@
+
+/home1a/georgios/vf/pareon_tools/vfg-verify-tst/wrappers/proj_jyAsHn/tests/use-after-free/true-positive/pt_barrier_wait/test.c:21:3: warning: implicit declaration of function 'pthread_barrier_wait' is invalid in C99 [-Wimplicit-function-declaration]
+  pthread_barrier_wait(barr);
+  ^

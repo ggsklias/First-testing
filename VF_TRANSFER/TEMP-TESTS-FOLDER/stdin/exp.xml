@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<report>
+  <runs>
+    <run status="ok" command="{{testexe}}" id="1" messages="0" runId="%ignore%" time="%ignore%"/>
+  </runs>
+  <messages>
+  </messages>
+</report>

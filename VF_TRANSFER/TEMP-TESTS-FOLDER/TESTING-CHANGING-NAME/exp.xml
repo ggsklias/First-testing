@@ -1,0 +1,46 @@
+<?xml version="1.0"?> 
+<report>
+  <runs>
+    <run status="ok" command="child_prog" id="1" messages="1" runId="%ignore%" time="%ignore%"/>
+  </runs>
+  <messages>
+    <message id="M0181" severity="1">
+      <source id="1" />
+      <runs>
+        <run id="1" messages="1" />
+      </runs>
+      <memoryLeak cyclic="false" indirectBytes="0" indirectObjects="0" objects="1">
+        <object>
+          <heap size="10">
+            <allocation function="calloc">
+              <frame analyzed="yes" function="thread_func">
+                <sourceLocation filePath="{{srcdir}}/lib.c" lineNumber="7" />
+              </frame>
+              <frame analyzed="yes" function="thread_entry_point" />
+            </allocation>
+          </heap>
+        </object>
+        <lastRootReference>
+          <localReference name="memleak">
+            <call>
+              <frame analyzed="yes" function="calloc" />
+              <frame analyzed="yes" function="thread_func">
+                <sourceLocation filePath="{{srcdir}}/lib.c" lineNumber="7" />
+              </frame>
+              <frame analyzed="yes" function="thread_entry_point" />
+            </call>
+          </localReference>
+        </lastRootReference>
+        <lastRootAccess>
+          <write>
+            <frame analyzed="yes" function="calloc" />
+            <frame analyzed="yes" function="thread_func">
+                <sourceLocation filePath="{{srcdir}}/lib.c" lineNumber="7" />
+            </frame>
+            <frame analyzed="yes" function="thread_entry_point" />
+          </write>
+        </lastRootAccess>
+      </memoryLeak>
+    </message>
+  </messages>
+</report>

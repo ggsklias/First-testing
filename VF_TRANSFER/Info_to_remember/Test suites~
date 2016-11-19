@@ -1,0 +1,31 @@
+Test suites:
+
+vfpackage-tst:	tests our final packaged product
+
+
+libcxx: 	is the test suite of libstdc++ I686 + x86_64 , 				CD			
+compiler-tst: 	is the test suite that comes with llvm	 (each platform)		NO
+chromium:	profile ? x86 + android(compilation only)				CD (clone)
+
+vfe-demo: 	has very large real world apps (verify- profile + each platform)	CD			DONE
+vfandroid-tst: 	tests for android where we used packaged apps				CD			DONE
+csmith: 	which is a software that generates random C programs (crazy programs)	CD			DONE
+
+vfui-tst: 	testing profile's gui							NO?
+
+
+-- CHANGES IN VFTESTUTILS ->
+	make in vfinfra
+
+-- MERGING DEVELOP ->
+git pull pareon
+merge develop (being in the other branch)
+git pull in -> gcc, vfcompiler, binutils, pareon, clang, llvm
+workspace build!!
+
+
+
+and then if you want to run the verify tests, you have to run make -j in gcc
+
+
+

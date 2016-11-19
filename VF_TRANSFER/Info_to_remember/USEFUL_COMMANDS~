@@ -1,0 +1,21 @@
+USEFUL COMMANDS:
+
+clang -fsanitize=address -O1 -fno-omit-frame-pointer -g test.c -> use of address sanitizer
+
+
+adb push -p './a.out' '/datal/local/a.out'
+
+vfcc -Wl,-pie test.c
+find . -name \*.swp -type f -delete 
+
+
+AARCH64_ANDROID_TOOLCHAIN=/home1/local/toolchains/aarch64-linux-android/bionic
+AARCH64_ANDROID_SYSROOT=$AARCH64_ANDROID_TOOLCHAIN/sysroot
+
+
+export PATH=/sbin:$PATH
+
+
+
+
+

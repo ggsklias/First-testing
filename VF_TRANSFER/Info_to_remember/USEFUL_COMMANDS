@@ -1,0 +1,36 @@
+USEFUL COMMANDS:
+
+clang -fsanitize=address -O1 -fno-omit-frame-pointer -g test.c -> use of address sanitizer
+
+
+adb push -p './a.out' '/datal/local/a.out'
+
+vfcc -Wl,-pie test.c
+find . -name \*.swp -type f -delete 
+
+
+AARCH64_ANDROID_TOOLCHAIN=/home1/local/toolchains/aarch64-linux-android/bionic
+AARCH64_ANDROID_SYSROOT=$AARCH64_ANDROID_TOOLCHAIN/sysroot
+
+
+export PATH=/sbin:$PATH
+
+
+TO RUN ON I686 REMOTE:
+ANA_PLATFORM=i686-linux-gnu
+VFCOMPILE_TYPE=remote
+REMOTE_HOST=vfbuild32
+VF_W_SCRIPT=<path_to_your_w_script>
+
+and PROBABLY -> make
+vfcompiler,
+vfexec,
+vfutils,
+vflib,
+make -j may not always work-
+make -> gives better messages as
+
+
+
+
+

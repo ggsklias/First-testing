@@ -1,0 +1,115 @@
+#!/bin/bash
+# In order to create another script add the configuration to the
+# case below and make a soft link with a new name to this script:
+# e.g. ln -s w t
+
+# set -x
+
+VFE_TRUNK=/home1/local64/pareon/development/
+VFE_RELEASE=/home1/local64/pareon/release/
+
+if [ -z "$NOVIRT" ]; then
+  . /virtualenvs/vfe/bin/activate
+fi
+
+dir=`dirname $0`
+PLATFORM=`$dir/platform`
+export ANA_PLATFORM=${ANA_PLATFORM:="x86_64-linux-gnu"}
+if [ -z "$VFBRANCH" ]; then
+  WORK=`git branch | grep "*" | cut -d' ' -f2`
+else
+  WORK="$VFBRANCH"
+fi
+export WORK=$WORK
+MYVFROOT=/home1/local64/pareon/release/r2.25_beta2/x86_64-linux
+MYVFROOT=${MYVFROOT:="$HOME/vf/install/$WORK/$PLATFORM"}
+if [ -z "$NO_COMPILER" ]; then
+  VFCCROOT=${VFCCROOT:=$MYVFROOT}
+else
+  VFCCROOT=${VFCCROOT:="$VFE_TRUNK/develop_2.21.98/$PLATFORM"}
+fi
+
+export VFCCINSTALL=$VFCCROOT/vfcompiler
+export PROMPT="[$WORK:$PRODUCT]"
+export VFINFRAINSTALL=$MYVFROOT/vfinfra
+export VFLIBINSTALL=$MYVFROOT/vflib
+export VFTASKSINSTALL=$VFE_RELEASE/install/${PLATFORM}/vftasks
+export VFEXECINSTALL=$MYVFROOT/vfexec
+export VFEXAMPLEINSTALL=${VFEXAMPLEINSTALL:="$MYVFROOT/vfexample"}
+export VFSERVICEINSTALL=$MYVFROOT/vfservice
+export VFQEMUINSTALL=$MYVFROOT/vfqemu
+export VFPLATFORMINSTALL=$MYVFROOT/vfplatform
+export VFCXXINSTALL=${VFCXXINSTALL:="$MYVFROOT/vfcxx"}
+export VFSERVERINSTALL=$MYVFROOT/vfserver
+export VFHELPINSTALL=$MYVFROOT/vfhelp
+export VFUIINSTALL=$MYVFROOT/vfui
+export VFUTILINSTALL=$MYVFROOT/vfutil
+
+echo 'Switching to a new working environment:'
+echo VFINFRAINSTALL=$VFINFRAINSTALL
+echo VFLIBINSTALL=$VFLIBINSTALL
+echo VFTASKSINSTALL=$VFTASKSINSTALL
+echo VFEXECINSTALL=$VFEXECINSTALL
+echo VFEXAMPLEINSTALL=$VFEXAMPLEINSTALL
+echo VFSERVICEINSTALL=$VFSERVICEINSTALL
+echo VFPLATFORMINSTALL=$VFPLATFORMINSTALL
+echo VFCCINSTALL=$VFCCINSTALL
+echo VFCXXINSTALL=$VFCXXINSTALL
+echo VFSERVERINSTALL=$VFSERVERINSTALL
+echo VFHELPINSTALL=$VFHELPINSTALL
+echo VFUIINSTALL=$VFUIINSTALL
+
+#export VF_MSG_WARN=yes
+#export VF_MSG_INFO=${VF_MSG_INFO:-1}
+export VF_WORKSPACE=/data/geoskl/project_dbs/$WORK
+#export VF_WORKSPACE=$HOME/tmp/project_dbs/$WORK
+
+# VF developer settings
+#export VF_DBG_INFO=${VF_DBG_INFO:-1}
+#export VF_DBG_WARN=yes
+#export VF_WARN_ON_VERSION_MISMATCH=true
+#export VF_PREFER_EXCEPTION=yes
+export OCAMLRUNPARAM=b
+#export VF_NO_ASSERT=true
+
+export VF_REPOSITORY=$VF_WORKSPACE
+
+export ARM_TARGET=odroid-xu3-sfp
+export ARM_USER=hudson
+export ARM_PASS=hudson
+export ANDROID_VERSION=17
+export ANDROID_SDK=/home1/local64/android/android-sdk-r24/
+export ANDROID_NDK=/home1/local64/android/android-ndk-r9b
+export TIZEN_SDK=/home1/local64/tizen/tizen-sdk
+export ARM_TIZEN_TOOLCHAIN=$TIZEN_SDK/tools/arm-linux-gnueabi-gcc-4.6
+export ARM_TIZEN_SYSROOT=$TIZEN_SDK/platforms/mobile-2.3/rootstraps/mobile-2.3-device.core
+export I386_TIZEN_TOOLCHAIN=$TIZEN_SDK/tools/i386-linux-gnueabi-gcc-4.6
+export I386_TIZEN_SYSROOT=$TIZEN_SDK/platforms/mobile-2.3/rootstraps/mobile-2.3-emulator.core
+export ARM_HF_TARGET=odroid-xu3-hf
+export ARM_HF_USER=hudson
+export ARM_HF_PASS=hudson
+
+
+export ARM_TOOLCHAIN=/home1/local/toolchains/arm-none-linux-gnueabi-4.8
+export ARM_SYSROOT=${ARM_TOOLCHAIN}/arm-none-linux-gnueabi/sysroot
+export ARM_HF_TOOLCHAIN=/home1/local/toolchains/arm-none-linux-gnueabihf-4.8
+export ARM_HF_SYSROOT=${ARM_HF_TOOLCHAIN}/arm-none-linux-gnueabihf/sysroot
+export ANDROID_TOOLCHAIN=/home1/local/toolchains/arm-linux-androideabi-4.8
+export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot
+
+########## tool settings required to execute developer tools
+
+export PATH=/home1/local64/clang34/bin:$PATH
+
+export PATH=${VFEXECINSTALL}/dev/bin:$PATH
+export PATH=${VFINFRAINSTALL}/tools/scripts:$PATH
+export PATH=${ANDROID_TOOLCHAIN}/bin:${ARM_TOOLCHAIN}/bin:${ARM_HF_TOOLCHAIN}/bin:${ANDROID_NDK}:${PATH}
+
+export MAJOR_VERSION=${MAJOR_VERSION:-0}
+export MINOR_VERSION=${MINOR_VERSION:-0}
+export BUILD_VERSION=${BUILD_VERSION:-0}
+export VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${BUILD_VERSION}
+
+. /home1/hudson/ci/pareon/util/vfconfig.sh
+
+exec $1
